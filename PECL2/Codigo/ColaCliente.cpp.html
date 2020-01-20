@@ -1,0 +1,124 @@
+<html>
+<head>
+<title>ColaCliente.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(187,181,41); }
+.s3 { color: rgb(106,135,89); }
+.s4 { color: rgb(204,120,50); }
+.s5 { color: rgb(104,151,187); }
+.s6 { color: rgb(204,120,50); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+ColaCliente.cpp</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">//</span><span class="s1"> 
+</span><span class="s0">// Created by marco on 08/12/2017.</span><span class="s1"> 
+</span><span class="s0">//</span><span class="s1"> 
+ 
+</span><span class="s2">#include </span><span class="s3">&quot;ColaCliente.h&quot;</span><span class="s1"> 
+ 
+</span><span class="s0">// Constructor de la cola.</span><span class="s1"> 
+ColaCliente::ColaCliente() 
+{ 
+    primero = NULL</span><span class="s4">;</span><span class="s1"> 
+    ultimo = NULL</span><span class="s4">;</span><span class="s1"> 
+    size = </span><span class="s5">0</span><span class="s4">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s0">//Inserta un cliente por el final.</span><span class="s1"> 
+</span><span class="s6">void </span><span class="s1">ColaCliente::insertar(Cliente cliente) 
+{ 
+    pnodo nuevo</span><span class="s4">;</span><span class="s1"> 
+    nuevo = </span><span class="s6">new </span><span class="s1">Nodo(cliente)</span><span class="s4">;</span><span class="s1"> 
+ 
+    </span><span class="s0">// Si existe último va a apuntar al nuevo que entra:</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(ultimo) { ultimo-&gt;siguiente = nuevo</span><span class="s4">; </span><span class="s1">} 
+    </span><span class="s0">// El nuevo que ha entrado pasa a ser el ultimo:</span><span class="s1"> 
+    ultimo = nuevo</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s0">// Si antes estaba vacía, el primero es el último:</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(!primero) { primero = nuevo</span><span class="s4">; </span><span class="s1">} 
+    size++</span><span class="s4">;</span><span class="s1"> 
+ 
+} 
+</span><span class="s0">// Saca al cliente de la cabeza.</span><span class="s1"> 
+Cliente ColaCliente::eliminar() 
+{ 
+    pnodo nodo</span><span class="s4">; </span><span class="s0">// Nuevo nodo</span><span class="s1"> 
+    Cliente clienteOuput</span><span class="s4">; </span><span class="s0">// Almacenará el cliente a devolver tras eliminarlo</span><span class="s1"> 
+    nodo = primero</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(!nodo) { </span><span class="s6">return </span><span class="s1">Cliente(</span><span class="s6">false</span><span class="s4">, </span><span class="s5">0</span><span class="s1">)</span><span class="s4">; </span><span class="s1">} </span><span class="s0">// Si no hay primero, cola vacía, devuelve NULL.</span><span class="s1"> 
+    primero = nodo-&gt;siguiente</span><span class="s4">; </span><span class="s0">// Si en efecto hay primero, primero pasará a apuntar al segundo.</span><span class="s1"> 
+    clienteOuput = nodo-&gt;cliente</span><span class="s4">; </span><span class="s0">// El cliente a devolver pasará a ser el cliente que almacenaba el nodo primero.</span><span class="s1"> 
+    </span><span class="s6">delete </span><span class="s1">nodo</span><span class="s4">; </span><span class="s0">// Elimino el nodo que contiene al primer cliente.</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(!primero) { ultimo = NULL</span><span class="s4">; </span><span class="s1">} </span><span class="s0">// Si tras sacarlo no hay primero, tampoco habrá último y la cola será vacía.</span><span class="s1"> 
+    size--</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s6">return </span><span class="s1">clienteOuput</span><span class="s4">;</span><span class="s1"> 
+ 
+} 
+</span><span class="s0">// Muestra la cola.</span><span class="s1"> 
+</span><span class="s6">void </span><span class="s1">ColaCliente::mostrar() 
+{ 
+    pnodo aux = primero</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s6">while </span><span class="s1">(aux) { 
+        cout &lt;&lt; aux-&gt;cliente.mostrarDatos() &lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        aux = aux-&gt;siguiente</span><span class="s4">;</span><span class="s1"> 
+    } 
+    cout &lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s0">// Destructor:</span><span class="s1"> 
+ColaCliente::~ColaCliente() {} 
+</span><span class="s0">// Vacia toda la cola. (La deja sin clientes)</span><span class="s1"> 
+</span><span class="s6">void </span><span class="s1">ColaCliente::vaciar() 
+{ 
+    </span><span class="s6">while </span><span class="s1">(primero) { eliminar()</span><span class="s4">; </span><span class="s1">} 
+    size = </span><span class="s5">0</span><span class="s4">;</span><span class="s1"> 
+} 
+</span><span class="s0">// T=&gt; Esta vacia. F=&gt; No esta vacia.</span><span class="s1"> 
+</span><span class="s6">bool </span><span class="s1">ColaCliente::estaVacia() { 
+    </span><span class="s6">if </span><span class="s1">(primero == NULL) { 
+        </span><span class="s6">return true</span><span class="s4">;</span><span class="s1"> 
+    } </span><span class="s6">else </span><span class="s1">{ 
+        </span><span class="s6">return false</span><span class="s4">;</span><span class="s1"> 
+    } 
+} 
+</span><span class="s0">// Devuelve el primero sin eliminarlo de la cola. Para hacer comprobaciones.</span><span class="s1"> 
+Cliente ColaCliente::getPrimero() { 
+    Cliente output = Cliente(</span><span class="s6">false</span><span class="s4">, </span><span class="s5">0</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+    pnodo nodo</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(!estaVacia()) { 
+        nodo = primero</span><span class="s4">;</span><span class="s1"> 
+        output = nodo-&gt;cliente</span><span class="s4">;</span><span class="s1"> 
+        </span><span class="s6">return </span><span class="s1">output</span><span class="s4">;</span><span class="s1"> 
+    } </span><span class="s6">else </span><span class="s1">{ 
+        </span><span class="s6">return </span><span class="s1">output</span><span class="s4">;</span><span class="s1"> 
+    } 
+} 
+</span><span class="s0">// Devuelve el ultimo sin eliminarlo de la cola. Para hacer comprobaciones.</span><span class="s1"> 
+Cliente ColaCliente::getUltimo() { 
+    Cliente output = Cliente(</span><span class="s6">false</span><span class="s4">, </span><span class="s5">0</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+    pnodo nodo</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(!estaVacia()) { 
+        nodo = ultimo</span><span class="s4">;</span><span class="s1"> 
+        output = nodo-&gt;cliente</span><span class="s4">;</span><span class="s1"> 
+        </span><span class="s6">return </span><span class="s1">output</span><span class="s4">;</span><span class="s1"> 
+    } </span><span class="s6">else </span><span class="s1">{ 
+        </span><span class="s6">return </span><span class="s1">output</span><span class="s4">;</span><span class="s1"> 
+    } 
+} 
+</span><span class="s0">// Devuelve el tamaño de la cola.</span><span class="s1"> 
+</span><span class="s6">int </span><span class="s1">ColaCliente::getSize() { 
+    </span><span class="s6">return </span><span class="s1">size</span><span class="s4">;</span><span class="s1"> 
+} 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<html>
+<head>
+<title>ArbolBinario.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(187,181,41); }
+.s3 { color: rgb(106,135,89); }
+.s4 { color: rgb(204,120,50); font-weight: bold; }
+.s5 { color: rgb(204,120,50); }
+.s6 { color: rgb(104,151,187); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+ArbolBinario.cpp</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">//</span><span class="s1"> 
+</span><span class="s0">// Created by marco on 08/12/2017.</span><span class="s1"> 
+</span><span class="s0">//</span><span class="s1"> 
+ 
+</span><span class="s2">#include </span><span class="s3">&quot;ArbolBinario.h&quot;</span><span class="s1"> 
+ 
+</span><span class="s0">// Constructor (Ya mete el cliente por defecto):</span><span class="s1"> 
+ArbolBinario::ArbolBinario() { 
+    </span><span class="s0">// Genero el cliente con DNI por defecto:</span><span class="s1"> 
+    Cliente cl_por_defecto =Cliente(</span><span class="s4">true</span><span class="s5">, </span><span class="s6">0</span><span class="s1">)</span><span class="s5">;</span><span class="s1"> 
+    cl_por_defecto.setDni(</span><span class="s3">&quot;55555555K&quot;</span><span class="s1">)</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s0">// Creo raiz:</span><span class="s1"> 
+    raiz = </span><span class="s4">new </span><span class="s1">NodoArbol(cl_por_defecto)</span><span class="s5">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s0">// insertar:</span><span class="s1"> 
+ 
+</span><span class="s4">void </span><span class="s1">ArbolBinario::insertar(Cliente cliente</span><span class="s5">, </span><span class="s1">pnodoarbol nodo) { 
+    </span><span class="s0">// Paso a enteros los DNI's. Descarto la letra final:</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">dni_a_insertar = stoi(cliente.getDni().substr(</span><span class="s6">0</span><span class="s5">,</span><span class="s6">8</span><span class="s1">))</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">dni_del_nodo = stoi(nodo-&gt;cliente.getDni().substr(</span><span class="s6">0</span><span class="s5">,</span><span class="s6">8</span><span class="s1">))</span><span class="s5">;</span><span class="s1"> 
+ 
+    </span><span class="s0">// Si el nodo es una hoja (Hijos vacíos):</span><span class="s1"> 
+    </span><span class="s4">if</span><span class="s1">(nodo-&gt;hijo_izquierdo == NULL &amp;&amp; nodo-&gt;hijo_derecho == NULL) 
+    { 
+        </span><span class="s0">// Si el DNI del cliente a insertar es menor que el del nodo:</span><span class="s1"> 
+        </span><span class="s4">if</span><span class="s1">(dni_a_insertar &lt; dni_del_nodo) { 
+            nodo-&gt;hijo_izquierdo = </span><span class="s4">new </span><span class="s1">NodoArbol(cliente)</span><span class="s5">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">// Si el DNI del cliente a insertar es MAYOR que el del nodo:</span><span class="s1"> 
+        </span><span class="s4">if</span><span class="s1">(dni_a_insertar &gt; dni_del_nodo){ 
+            nodo-&gt;hijo_derecho = </span><span class="s4">new </span><span class="s1">NodoArbol(cliente)</span><span class="s5">;</span><span class="s1"> 
+        } 
+    } 
+        </span><span class="s0">// Si no es una hoja:</span><span class="s1"> 
+    </span><span class="s4">else</span><span class="s1"> 
+    { 
+        </span><span class="s0">// Si el DNI del cliente a insertar es menor que el del nodo:</span><span class="s1"> 
+        </span><span class="s4">if</span><span class="s1">(dni_a_insertar &lt; dni_del_nodo) 
+        { 
+            </span><span class="s4">if</span><span class="s1">(nodo-&gt;hijo_izquierdo == NULL) 
+                nodo-&gt;hijo_izquierdo = </span><span class="s4">new </span><span class="s1">NodoArbol(cliente)</span><span class="s5">; </span><span class="s0">// Si no hay nodo hijo, lo creo.</span><span class="s1"> 
+            </span><span class="s4">if</span><span class="s1">(nodo-&gt;hijo_izquierdo != NULL) 
+                insertar(cliente</span><span class="s5">, </span><span class="s1">nodo-&gt;hijo_izquierdo)</span><span class="s5">; </span><span class="s0">// Si hay nodo se inserta en él.</span><span class="s1"> 
+        } 
+            </span><span class="s0">// Si el DNI del cliente a insertar es MAYOR que el del nodo:</span><span class="s1"> 
+        </span><span class="s4">else if</span><span class="s1">(dni_a_insertar &gt; dni_del_nodo) 
+        { 
+            </span><span class="s4">if</span><span class="s1">(nodo-&gt;hijo_derecho == NULL) 
+                nodo-&gt;hijo_derecho = </span><span class="s4">new </span><span class="s1">NodoArbol(cliente)</span><span class="s5">; </span><span class="s0">// Si no hay nodo hijo, lo creo.</span><span class="s1"> 
+            </span><span class="s4">if</span><span class="s1">(nodo-&gt;hijo_derecho != NULL) 
+                insertar(cliente</span><span class="s5">, </span><span class="s1">nodo-&gt;hijo_derecho)</span><span class="s5">; </span><span class="s0">// Si hay nodo se inserta en él.</span><span class="s1"> 
+ 
+        } 
+    } 
+ 
+} 
+ 
+</span><span class="s0">// Mostrar árbol:</span><span class="s1"> 
+ 
+</span><span class="s4">void </span><span class="s1">ArbolBinario::mostrarArbolInorden(pnodoarbol nodo) { 
+    </span><span class="s4">if</span><span class="s1">(nodo == NULL) cout &lt;&lt; </span><span class="s3">&quot;&quot;</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">else</span><span class="s1"> 
+    { 
+        mostrarArbolInorden(nodo-&gt;hijo_izquierdo)</span><span class="s5">;</span><span class="s1"> 
+        cout &lt;&lt; nodo-&gt;cliente.mostrarDatos() &lt;&lt; endl</span><span class="s5">;</span><span class="s1"> 
+        mostrarArbolInorden(nodo-&gt;hijo_derecho)</span><span class="s5">;</span><span class="s1"> 
+    } 
+} 
+ 
+</span><span class="s4">void </span><span class="s1">ArbolBinario::mostrarArbolPosorden(pnodoarbol nodo) { 
+    </span><span class="s4">if</span><span class="s1">(nodo == NULL) cout &lt;&lt; </span><span class="s3">&quot;&quot;</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">else</span><span class="s1"> 
+    { 
+        mostrarArbolPosorden(nodo-&gt;hijo_izquierdo)</span><span class="s5">;</span><span class="s1"> 
+        mostrarArbolPosorden(nodo-&gt;hijo_derecho)</span><span class="s5">;</span><span class="s1"> 
+        cout &lt;&lt; nodo-&gt;cliente.mostrarDatos() &lt;&lt; endl</span><span class="s5">;</span><span class="s1"> 
+    } 
+ 
+} 
+ 
+</span><span class="s4">void </span><span class="s1">ArbolBinario::mostrarArbolPreorden(pnodoarbol nodo) { 
+    </span><span class="s4">if</span><span class="s1">(nodo == NULL) cout &lt;&lt; </span><span class="s3">&quot;&quot;</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">else</span><span class="s1"> 
+    { 
+        cout &lt;&lt; nodo-&gt;cliente.mostrarDatos() &lt;&lt; endl</span><span class="s5">;</span><span class="s1"> 
+        mostrarArbolPreorden(nodo-&gt;hijo_izquierdo)</span><span class="s5">;</span><span class="s1"> 
+        mostrarArbolPreorden(nodo-&gt;hijo_derecho)</span><span class="s5">;</span><span class="s1"> 
+    } 
+ 
+} 
+ 
+</span><span class="s0">// Accesos directos:</span><span class="s1"> 
+ 
+</span><span class="s4">void </span><span class="s1">ArbolBinario::mostrarArbolPosorden() { 
+    mostrarArbolPosorden(raiz)</span><span class="s5">;</span><span class="s1"> 
+ 
+ 
+} 
+ 
+</span><span class="s4">void </span><span class="s1">ArbolBinario::mostrarArbolInorden() { 
+    mostrarArbolInorden(raiz)</span><span class="s5">;</span><span class="s1"> 
+ 
+} 
+ 
+</span><span class="s4">void </span><span class="s1">ArbolBinario::mostrarArbolPreorden() { 
+    mostrarArbolPreorden(raiz)</span><span class="s5">;</span><span class="s1"> 
+ 
+} 
+ 
+</span><span class="s4">void </span><span class="s1">ArbolBinario::insertar(Cliente cliente) { 
+    insertar(cliente</span><span class="s5">, </span><span class="s1">raiz)</span><span class="s5">;</span><span class="s1"> 
+ 
+} 
+ 
+Cliente ArbolBinario::buscarCliente(string dni</span><span class="s5">, </span><span class="s1">pnodoarbol nodo) { 
+ 
+    </span><span class="s0">// Convierto a enteros los DNI's para poder comparar. (Descarto la letra final).</span><span class="s1"> 
+ 
+    </span><span class="s4">int </span><span class="s1">dni_buscado = stoi(dni.substr(</span><span class="s6">0</span><span class="s5">,</span><span class="s6">8</span><span class="s1">))</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">dni_del_nodo = stoi(nodo-&gt;cliente.getDni().substr(</span><span class="s6">0</span><span class="s5">,</span><span class="s6">8</span><span class="s1">))</span><span class="s5">;</span><span class="s1"> 
+ 
+    </span><span class="s0">// Si acierto, devuelve el cliente.</span><span class="s1"> 
+    </span><span class="s4">if</span><span class="s1">(dni_buscado == dni_del_nodo) </span><span class="s4">return </span><span class="s1">nodo-&gt;cliente</span><span class="s5">;</span><span class="s1"> 
+ 
+        </span><span class="s0">// Si no, si hay hijo derecho y el dni es mayor que el del nodo, busco ahí:</span><span class="s1"> 
+    </span><span class="s4">else if</span><span class="s1">(dni_buscado &gt; dni_del_nodo &amp;&amp; nodo-&gt;hijo_derecho != NULL) 
+        </span><span class="s4">return </span><span class="s1">buscarCliente(dni</span><span class="s5">, </span><span class="s1">nodo-&gt;hijo_derecho)</span><span class="s5">;</span><span class="s1"> 
+ 
+        </span><span class="s0">// Si no, si hay hijo izquierdo y el dni es menor que el del nodo, busco ahí:</span><span class="s1"> 
+    </span><span class="s4">else if</span><span class="s1">(dni_buscado &lt; dni_del_nodo &amp;&amp; nodo-&gt;hijo_izquierdo != NULL) 
+        </span><span class="s4">return </span><span class="s1">buscarCliente(dni</span><span class="s5">, </span><span class="s1">nodo-&gt;hijo_izquierdo)</span><span class="s5">;</span><span class="s1"> 
+ 
+    </span><span class="s0">// Finalmente, si no se encuentra el cliente, devuelve un cliente por defecto:</span><span class="s1"> 
+    Cliente no_encontrado = Cliente(</span><span class="s4">true</span><span class="s5">,</span><span class="s1">-</span><span class="s6">1</span><span class="s1">)</span><span class="s5">;</span><span class="s1"> 
+    cout &lt;&lt; </span><span class="s3">&quot;Error. Cliente no encontrando. &quot; </span><span class="s1">&lt;&lt; endl</span><span class="s5">;</span><span class="s1"> 
+    no_encontrado.setDni(</span><span class="s3">&quot;ERROR. CLIENTE NO ENCONTRADO.&quot;</span><span class="s1">)</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">return </span><span class="s1">no_encontrado</span><span class="s5">;</span><span class="s1"> 
+ 
+} 
+ 
+</span><span class="s4">void </span><span class="s1">ArbolBinario::imprimeArbol(pnodoarbol arbol</span><span class="s5">, </span><span class="s4">int </span><span class="s1">cont) 
+{ 
+    </span><span class="s4">if </span><span class="s1">(arbol == NULL) </span><span class="s4">return</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">else</span><span class="s1"> 
+    { 
+        imprimeArbol(arbol-&gt;hijo_derecho</span><span class="s5">, </span><span class="s1">cont+</span><span class="s6">1</span><span class="s1">)</span><span class="s5">;</span><span class="s1"> 
+        </span><span class="s4">for </span><span class="s1">(</span><span class="s4">int </span><span class="s1">i = </span><span class="s6">0</span><span class="s5">; </span><span class="s1">i &lt; cont</span><span class="s5">; </span><span class="s1">i++) { 
+            cout &lt;&lt; </span><span class="s3">&quot;|&quot; </span><span class="s1">&lt;&lt; </span><span class="s3">&quot;          &quot;</span><span class="s5">;</span><span class="s1"> 
+        } 
+    } 
+    cout &lt;&lt; arbol-&gt;cliente.getDni() + </span><span class="s3">&quot;--|&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s5">;</span><span class="s1"> 
+    imprimeArbol(arbol-&gt;hijo_izquierdo</span><span class="s5">, </span><span class="s1">cont + </span><span class="s6">1</span><span class="s1">)</span><span class="s5">;</span><span class="s1"> 
+} 
+ 
+Cliente ArbolBinario::buscarCliente(string dni) { 
+    </span><span class="s4">return </span><span class="s1">buscarCliente(dni</span><span class="s5">, </span><span class="s1">raiz)</span><span class="s5">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s4">void </span><span class="s1">ArbolBinario::imprimeArbol() { 
+    imprimeArbol(raiz</span><span class="s5">, </span><span class="s6">0</span><span class="s1">)</span><span class="s5">;</span><span class="s1"> 
+ 
+} 
+</span></pre>
+</body>
+</html>

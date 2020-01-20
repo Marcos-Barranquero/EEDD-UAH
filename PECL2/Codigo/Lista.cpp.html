@@ -1,0 +1,146 @@
+<html>
+<head>
+<title>Lista.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(187,181,41); }
+.s3 { color: rgb(106,135,89); }
+.s4 { color: rgb(204,120,50); }
+.s5 { color: rgb(104,151,187); }
+.s6 { color: rgb(204,120,50); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Lista.cpp</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">//</span><span class="s1"> 
+</span><span class="s0">// Created by dcc on 21/11/2017.</span><span class="s1"> 
+</span><span class="s0">//</span><span class="s1"> 
+ 
+</span><span class="s2">#include </span><span class="s3">&quot;Lista.h&quot;</span><span class="s1"> 
+</span><span class="s0">// Constructor de la lista.</span><span class="s1"> 
+Lista::Lista() 
+{ 
+    primero = NULL</span><span class="s4">;</span><span class="s1"> 
+    ultimo = NULL</span><span class="s4">;</span><span class="s1"> 
+    size = </span><span class="s5">0</span><span class="s4">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Saca al cliente primer cliente.</span><span class="s1"> 
+Cliente Lista::eliminar() 
+{ 
+    pnodo nodo</span><span class="s4">; </span><span class="s0">// Nuevo nodo</span><span class="s1"> 
+    Cliente clienteOuput</span><span class="s4">; </span><span class="s0">// Almacenará el cliente a devolver tras eliminarlo</span><span class="s1"> 
+    nodo = primero</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(!nodo) { </span><span class="s6">return </span><span class="s1">Cliente(</span><span class="s6">false</span><span class="s4">, </span><span class="s5">0</span><span class="s1">)</span><span class="s4">; </span><span class="s1">} </span><span class="s0">// Si no hay primero, cola vacía, devuelve NULL.</span><span class="s1"> 
+    primero = nodo-&gt;siguiente</span><span class="s4">; </span><span class="s0">// Si en efecto hay primero, primero pasará a apuntar al segundo.</span><span class="s1"> 
+    clienteOuput = nodo-&gt;cliente</span><span class="s4">; </span><span class="s0">// El cliente a devolver pasará a ser el cliente que almacenaba el nodo primero.</span><span class="s1"> 
+    </span><span class="s6">delete </span><span class="s1">nodo</span><span class="s4">; </span><span class="s0">// Elimino el nodo que contiene al primer cliente.</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(!primero) { ultimo = NULL</span><span class="s4">; </span><span class="s1">} </span><span class="s0">// Si tras sacarlo no hay primero, tampoco habrá último y la cola será vacía.</span><span class="s1"> 
+    size--</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s6">return </span><span class="s1">clienteOuput</span><span class="s4">;</span><span class="s1"> 
+ 
+} 
+</span><span class="s0">// Vacia toda la lista. (La deja sin clientes)</span><span class="s1"> 
+</span><span class="s6">void </span><span class="s1">Lista::vaciar() 
+{ 
+    </span><span class="s6">while </span><span class="s1">(primero) { eliminar()</span><span class="s4">; </span><span class="s1">} 
+    size = </span><span class="s5">0</span><span class="s4">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Muestra la cola.</span><span class="s1"> 
+</span><span class="s6">void </span><span class="s1">Lista::mostrar() 
+{ 
+    pnodo aux = primero</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s6">while </span><span class="s1">(aux) { 
+        cout &lt;&lt; aux-&gt;cliente.mostrarDatos() &lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        aux = aux-&gt;siguiente</span><span class="s4">;</span><span class="s1"> 
+    } 
+    cout &lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s0">// Inserta a un cliente en orden, según su ID.</span><span class="s1"> 
+</span><span class="s6">void </span><span class="s1">Lista::insertarPorId(Cliente cliente) { 
+    </span><span class="s6">if</span><span class="s1">(estaVacia()){insertar(cliente)</span><span class="s4">;</span><span class="s1">} </span><span class="s0">// Si la cola está vacía inserta normalmente.</span><span class="s1"> 
+    </span><span class="s6">else if </span><span class="s1">(primero-&gt;cliente.getId() &gt; cliente.getId()) 
+    {primero=</span><span class="s6">new </span><span class="s1">Nodo(cliente</span><span class="s4">,</span><span class="s1">primero)</span><span class="s4">;</span><span class="s1">} 
+    </span><span class="s6">else if</span><span class="s1">(ultimo-&gt;cliente.getId()&lt;cliente.getId()) 
+    { 
+        </span><span class="s0">//Si la id del ultimo es menor que la del cliente a insertar, lo inserta por el final:</span><span class="s1"> 
+        insertar(cliente)</span><span class="s4">;</span><span class="s1"> 
+    } 
+    </span><span class="s6">else</span><span class="s1">{ 
+        pnodo aux</span><span class="s4">; </span><span class="s0">// Nodo auxiliar que recorrerá la cola</span><span class="s1"> 
+        aux = primero</span><span class="s4">; </span><span class="s0">// Empezando por el primero</span><span class="s1"> 
+        </span><span class="s6">while </span><span class="s1">(aux-&gt;siguiente-&gt;cliente.getId() &lt; cliente.getId()) 
+        { 
+            aux=aux-&gt;siguiente</span><span class="s4">; </span><span class="s0">// Irá avanzando</span><span class="s1"> 
+        } </span><span class="s0">// Hasta que encuentre un nodo-&gt;siguiente.id &gt; que la id del cliente a insertar.</span><span class="s1"> 
+        </span><span class="s0">//cout &lt;&lt; &quot;Aux: &quot; + aux-&gt;cliente.mostrarDatos() &lt;&lt; endl;</span><span class="s1"> 
+        </span><span class="s0">//cout &lt;&lt; &quot;Aux.siguiente: &quot; + aux-&gt;siguiente-&gt;cliente.mostrarDatos() &lt;&lt; endl;</span><span class="s1"> 
+        aux-&gt;siguiente = </span><span class="s6">new </span><span class="s1">Nodo(cliente</span><span class="s4">, </span><span class="s1">aux-&gt;siguiente)</span><span class="s4">; </span><span class="s0">// Se añade entre medias del elemento</span><span class="s1"> 
+        </span><span class="s0">// Con ID menor y mayor. (menor &lt; cliente &lt; Mayor)</span><span class="s1"> 
+    } 
+    size++</span><span class="s4">;</span><span class="s1"> 
+ 
+} 
+</span><span class="s0">//Inserta un cliente por el final.</span><span class="s1"> 
+</span><span class="s6">void </span><span class="s1">Lista::insertar(Cliente cliente) 
+{ 
+    pnodo nuevo</span><span class="s4">;</span><span class="s1"> 
+    nuevo = </span><span class="s6">new </span><span class="s1">Nodo(cliente)</span><span class="s4">;</span><span class="s1"> 
+ 
+    </span><span class="s0">// Si existe último va a apuntar al nuevo que entra:</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(ultimo) { ultimo-&gt;siguiente = nuevo</span><span class="s4">; </span><span class="s1">} 
+    </span><span class="s0">// El nuevo que ha entrado pasa a ser el ultimo:</span><span class="s1"> 
+    ultimo = nuevo</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s0">// Si antes estaba vacía, el primero es el último:</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(!primero) { primero = nuevo</span><span class="s4">; </span><span class="s1">} 
+    size++</span><span class="s4">;</span><span class="s1"> 
+ 
+} 
+ 
+ 
+</span><span class="s0">// T=&gt; Esta vacia. F=&gt; No esta vacia.</span><span class="s1"> 
+</span><span class="s6">bool </span><span class="s1">Lista::estaVacia() { 
+    </span><span class="s6">if </span><span class="s1">(primero == NULL) { 
+        </span><span class="s6">return true</span><span class="s4">;</span><span class="s1"> 
+    } </span><span class="s6">else </span><span class="s1">{ 
+        </span><span class="s6">return false</span><span class="s4">;</span><span class="s1"> 
+    } 
+} 
+</span><span class="s0">// Devuelve el primero sin eliminarlo de la cola. Para hacer comprobaciones.</span><span class="s1"> 
+Cliente Lista::getPrimero() { 
+    Cliente output = Cliente(</span><span class="s6">false</span><span class="s4">, </span><span class="s5">0</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+    pnodo nodo</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(!estaVacia()) { 
+        nodo = primero</span><span class="s4">;</span><span class="s1"> 
+        output = nodo-&gt;cliente</span><span class="s4">;</span><span class="s1"> 
+        </span><span class="s6">return </span><span class="s1">output</span><span class="s4">;</span><span class="s1"> 
+    } </span><span class="s6">else </span><span class="s1">{ 
+        </span><span class="s6">return </span><span class="s1">output</span><span class="s4">;</span><span class="s1"> 
+    } 
+} 
+</span><span class="s0">// Devuelve el ultimo sin eliminarlo de la cola. Para hacer comprobaciones.</span><span class="s1"> 
+Cliente Lista::getUltimo() { 
+    Cliente output = Cliente(</span><span class="s6">false</span><span class="s4">, </span><span class="s5">0</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+    pnodo nodo</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s6">if </span><span class="s1">(!estaVacia()) { 
+        nodo = ultimo</span><span class="s4">;</span><span class="s1"> 
+        output = nodo-&gt;cliente</span><span class="s4">;</span><span class="s1"> 
+        </span><span class="s6">return </span><span class="s1">output</span><span class="s4">;</span><span class="s1"> 
+    } </span><span class="s6">else </span><span class="s1">{ 
+        </span><span class="s6">return </span><span class="s1">output</span><span class="s4">;</span><span class="s1"> 
+    } 
+} 
+</span><span class="s0">// Devuelve el tamaño de la cola.</span><span class="s1"> 
+</span><span class="s6">int </span><span class="s1">Lista::getSize() { 
+    </span><span class="s6">return </span><span class="s1">size</span><span class="s4">;</span><span class="s1"> 
+}</span></pre>
+</body>
+</html>

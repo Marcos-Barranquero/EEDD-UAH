@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>Cliente.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(187,181,41); }
+.s3 { color: rgb(106,135,89); }
+.s4 { color: rgb(204,120,50); font-weight: bold; }
+.s5 { color: rgb(204,120,50); }
+.s6 { color: rgb(104,151,187); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Cliente.cpp</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">//</span><span class="s1"> 
+</span><span class="s0">// Created by Marcos on 17/10/2017.</span><span class="s1"> 
+</span><span class="s0">//</span><span class="s1"> 
+ 
+</span><span class="s2">#include </span><span class="s3">&quot;Cliente.h&quot;</span><span class="s1"> 
+ 
+</span><span class="s0">// Constructor por defecto</span><span class="s1"> 
+Cliente::Cliente() {} 
+ 
+</span><span class="s0">// Constructor que recibe si es registrado o no y la hora de compra</span><span class="s1"> 
+Cliente::Cliente(</span><span class="s4">bool </span><span class="s1">registrado</span><span class="s5">, </span><span class="s4">int </span><span class="s1">tInicioCompra) 
+{ 
+    </span><span class="s4">this</span><span class="s1">-&gt;registrado = registrado</span><span class="s5">;</span><span class="s1"> 
+ 
+ 
+    generaDni()</span><span class="s5">;</span><span class="s1"> 
+    generaTiempo(tInicioCompra)</span><span class="s5">;</span><span class="s1"> 
+    generaId()</span><span class="s5">;</span><span class="s1"> 
+ 
+} 
+ 
+</span><span class="s0">// Genera un número aleatorio entre un máximo y un mínimo ambos inclusivos</span><span class="s1"> 
+</span><span class="s4">int </span><span class="s1">Cliente::numeroAleatorio(</span><span class="s4">int </span><span class="s1">min</span><span class="s5">, </span><span class="s4">int </span><span class="s1">max) 
+{ 
+    </span><span class="s4">int </span><span class="s1">numero_aleatorio = min + rand() % (max + </span><span class="s6">1 </span><span class="s1">- min)</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">return </span><span class="s1">numero_aleatorio</span><span class="s5">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Genera un tiempo de proceso de compra aleatorio entre 0 y 10</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Cliente::generaTiempo(</span><span class="s4">int </span><span class="s1">tInicioCompra) 
+{ 
+    </span><span class="s4">this</span><span class="s1">-&gt;tInicioCompra = tInicioCompra</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">this</span><span class="s1">-&gt;tProcesamiento = numeroAleatorio(</span><span class="s6">1</span><span class="s5">, </span><span class="s6">10</span><span class="s1">)</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">this</span><span class="s1">-&gt;tFinCompra = </span><span class="s6">0</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">this</span><span class="s1">-&gt;tEsperaServidor = </span><span class="s6">0</span><span class="s5">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Genera un Dni aleatorio</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Cliente::generaDni() 
+{ 
+    </span><span class="s4">const </span><span class="s1">string letras_dni = </span><span class="s3">&quot;TRWAGMYFPDXBNJZSQVHLCKE&quot;</span><span class="s5">; </span><span class="s0">// Posibles letras del Dni, ordenadas. (0-22)</span><span class="s1"> 
+    string num_dni_aux</span><span class="s5">; </span><span class="s0">//Guarda los numeros del dni en una string</span><span class="s1"> 
+    string dni_string</span><span class="s5">; </span><span class="s0">// Guarda la cadena del Dni (numero + letra)</span><span class="s1"> 
+ 
+    </span><span class="s0">//Genero números aleatorios para el Dni en una string:</span><span class="s1"> 
+    </span><span class="s4">for </span><span class="s1">(</span><span class="s4">int </span><span class="s1">j = </span><span class="s6">0</span><span class="s5">; </span><span class="s1">j &lt; </span><span class="s6">8</span><span class="s5">; </span><span class="s1">++j) { 
+        num_dni_aux += to_string(numeroAleatorio(</span><span class="s6">1</span><span class="s5">, </span><span class="s6">9</span><span class="s1">))</span><span class="s5">; </span><span class="s0">//Concateno un aleatorio del 0 al 9</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">// Lo transformo de string a int</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">numero_dni = atoi(num_dni_aux.c_str())</span><span class="s5">;</span><span class="s1"> 
+ 
+    </span><span class="s0">// Calculo la letra</span><span class="s1"> 
+    </span><span class="s4">char </span><span class="s1">letra = letras_dni[numero_dni % </span><span class="s6">23</span><span class="s1">]</span><span class="s5">;</span><span class="s1"> 
+ 
+ 
+    </span><span class="s0">//Concateno letra y numero_dni:</span><span class="s1"> 
+    dni_string = to_string(numero_dni) + letra</span><span class="s5">;</span><span class="s1"> 
+ 
+    </span><span class="s0">//Guardo el dni como un string en el atributo Dni de Cliente:</span><span class="s1"> 
+    Dni = dni_string</span><span class="s5">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Genera una Id de 4 letras aleatorias del abecedario</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Cliente::generaId() 
+{ 
+    string abecedario = </span><span class="s3">&quot;ABCDERFGHIJKLMNOPQRSTUVWXYZ&quot;</span><span class="s5">;</span><span class="s1"> 
+    Id=</span><span class="s3">&quot;&quot;</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">for </span><span class="s1">(</span><span class="s4">int </span><span class="s1">i = </span><span class="s6">0</span><span class="s5">; </span><span class="s1">i &lt; </span><span class="s6">4</span><span class="s5">; </span><span class="s1">i++)  { 
+        Id+=abecedario[numeroAleatorio(</span><span class="s6">0</span><span class="s5">,</span><span class="s1">abecedario.length()-</span><span class="s6">1</span><span class="s1">)]</span><span class="s5">;</span><span class="s1"> 
+    } 
+} 
+ 
+</span><span class="s0">// Devuelve una representación escrita del Cliente.</span><span class="s1"> 
+string Cliente::mostrarDatos() 
+{ 
+    string dni = string(Dni)</span><span class="s5">;</span><span class="s1"> 
+    string id = string(Id)</span><span class="s5">;</span><span class="s1"> 
+    string iniCompra = std::to_string(tInicioCompra)</span><span class="s5">;</span><span class="s1"> 
+    string duracion = to_string(tProcesamiento)</span><span class="s5">;</span><span class="s1"> 
+    string finCompra = to_string(tFinCompra)</span><span class="s5">;</span><span class="s1"> 
+    string espera = to_string(tEsperaServidor)</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">return </span><span class="s3">&quot;Dni: &quot; </span><span class="s1">+ dni + </span><span class="s3">&quot; - tIni: &quot; </span><span class="s1">+ iniCompra + </span><span class="s3">&quot; - tProc: &quot; </span><span class="s1">+ duracion + </span><span class="s3">&quot; - tEspera: &quot; </span><span class="s1">+ espera 
+           + </span><span class="s3">&quot; - tFin: &quot; </span><span class="s1">+ finCompra + </span><span class="s3">&quot; - ID: &quot; </span><span class="s1">+ id</span><span class="s5">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s0">// Devuelve T si es registrado, F si no.</span><span class="s1"> 
+</span><span class="s4">bool </span><span class="s1">Cliente::esRegistrado() 
+{ 
+    </span><span class="s4">return </span><span class="s1">registrado</span><span class="s5">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Devuelve el DNI</span><span class="s1"> 
+string Cliente::getDni() { 
+    </span><span class="s4">return </span><span class="s1">Dni</span><span class="s5">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s0">// Devuelve la ID</span><span class="s1"> 
+string Cliente::getId() { 
+    </span><span class="s4">return </span><span class="s1">Id</span><span class="s5">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Devuelve el tiempo de inicio</span><span class="s1"> 
+</span><span class="s4">int </span><span class="s1">Cliente::getTInicioCompra() { 
+    </span><span class="s4">return </span><span class="s1">tInicioCompra</span><span class="s5">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Dev. tProc.</span><span class="s1"> 
+</span><span class="s4">int </span><span class="s1">Cliente::getTProcesamiento() { 
+    </span><span class="s4">return </span><span class="s1">tProcesamiento</span><span class="s5">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Devuelve el tiempo de finalización</span><span class="s1"> 
+</span><span class="s4">int </span><span class="s1">Cliente::getTFinCompra() { 
+    </span><span class="s4">return </span><span class="s1">tFinCompra</span><span class="s5">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Devuelve el tiempo de Espera</span><span class="s1"> 
+</span><span class="s4">int </span><span class="s1">Cliente::getTEsperaServidor() { 
+    </span><span class="s4">return </span><span class="s1">tEsperaServidor</span><span class="s5">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s0">// Permite setear el DNI del cliente</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Cliente::setDni(string dni) { 
+    </span><span class="s4">this</span><span class="s1">-&gt;Dni = dni</span><span class="s5">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s0">// Permite setear el tiempo de Fin de compra del cliente.</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Cliente::setTFinCompra(</span><span class="s4">int </span><span class="s1">reloj) { 
+    </span><span class="s4">this</span><span class="s1">-&gt;tFinCompra = reloj</span><span class="s5">;</span><span class="s1"> 
+    </span><span class="s4">this</span><span class="s1">-&gt;tEsperaServidor = tFinCompra - (tInicioCompra + tProcesamiento)</span><span class="s5">;</span><span class="s1"> 
+} 
+ 
+</span></pre>
+</body>
+</html>

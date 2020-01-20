@@ -1,0 +1,194 @@
+<html>
+<head>
+<title>main.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(187,181,41); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(106,135,89); }
+.s3 { color: rgb(204,120,50); font-weight: bold; }
+.s4 { color: rgb(204,120,50); }
+.s5 { color: rgb(104,151,187); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+main.cpp</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">#include </span><span class="s2">&lt;iostream&gt;</span><span class="s1"> 
+</span><span class="s0">#include </span><span class="s2">&lt;time.h&gt;</span><span class="s1"> 
+</span><span class="s0">#include </span><span class="s2">&quot;Programa.h&quot;</span><span class="s1"> 
+ 
+</span><span class="s3">void </span><span class="s1">mensaje(string mensaje) { 
+    cout &lt;&lt; mensaje &lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s3">void </span><span class="s1">pausa() 
+{ 
+    system(</span><span class="s2">&quot;pause&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+    system(</span><span class="s2">&quot;cls&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s3">void </span><span class="s1">menu() { 
+    Programa gestorClientes = Programa()</span><span class="s4">;</span><span class="s1"> 
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE)</span><span class="s4">;</span><span class="s1"> 
+    </span><span class="s3">char </span><span class="s1">opcion = </span><span class="s2">'X'</span><span class="s4">;</span><span class="s1"> 
+ 
+    </span><span class="s3">while </span><span class="s1">(opcion != </span><span class="s2">'S'</span><span class="s1">) { 
+        SetConsoleTextAttribute(hConsole</span><span class="s4">, </span><span class="s5">74</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\n\t</span><span class="s2">-------------------------------------------------&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">-                   MENU                        -&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">-------------------------------------------------&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        SetConsoleTextAttribute(hConsole</span><span class="s4">, </span><span class="s5">47</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+ 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">Numero de clientes VIP: &quot; </span><span class="s1">&lt;&lt; setw(</span><span class="s5">2</span><span class="s1">) &lt;&lt; gestorClientes.nClientesVip()</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot; Numero de clientes no VIP: &quot; </span><span class="s1">&lt;&lt; setw(</span><span class="s5">2</span><span class="s1">) &lt;&lt; gestorClientes.nClientesNoVip() &lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        SetConsoleTextAttribute(hConsole</span><span class="s4">, </span><span class="s5">7</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+ 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">A) Generar solicitudes de entradas de los clientes VIP.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">B) Mostrar la cola de solicitudes de espera de clientes VIP.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">C) Borrar la cola de solicitudes en espera de clientes VIP.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">D) Generar solicitudes de entradas de los clientes no VIP.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">E) Mostrar la cola de solicitudes de espera de clientes no VIP.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">F) Borrar la cola de solicitudes en espera de clientes no VIP.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">G) Simular el proceso de compra de entradas de los clientes VIP.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">H) Simular el proceso de compra de entradas de los clientes no VIP.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">I) Mostrar la lista de entradas vendidas.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">J) Reiniciar el programa.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">K) Crear un arbol binario de busqueda ordenado por DNI.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">L) Buscar un cliente en el arbol binario proporcionando DNI.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">M) Mostrar ABB en preorden.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">N) Mostrar ABB en postorden.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">O) Mostrar ABB en inorden.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\t</span><span class="s2">P) Dibujar arbol binario.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s2">&quot;</span><span class="s4">\n\n\t</span><span class="s2">S) Salir del programa.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+ 
+ 
+        cout &lt;&lt; </span><span class="s2">&quot;Introduce opcion: &quot;</span><span class="s4">;</span><span class="s1"> 
+        cin &gt;&gt; opcion</span><span class="s4">;</span><span class="s1"> 
+        </span><span class="s3">switch </span><span class="s1">(opcion) { 
+            </span><span class="s3">case </span><span class="s2">'A'</span><span class="s1">: 
+                mensaje(</span><span class="s2">&quot;Generando cola VIP.&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                gestorClientes.generarColaVIP()</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'B'</span><span class="s1">: 
+                system(</span><span class="s2">&quot;cls&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                mensaje(</span><span class="s2">&quot;Mostrando cola VIP.&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                gestorClientes.mostrarColaVip()</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'C'</span><span class="s1">: 
+                mensaje(</span><span class="s2">&quot;Vaciando cola VIP.&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                gestorClientes.vaciarColaVip()</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'D'</span><span class="s1">: 
+                mensaje(</span><span class="s2">&quot;Generando cola no VIP.&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                gestorClientes.generarColaNoVIP()</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'E'</span><span class="s1">: 
+                system(</span><span class="s2">&quot;cls&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                mensaje(</span><span class="s2">&quot;Mostrando cola no VIP.&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                gestorClientes.mostrarColaNoVip()</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'F'</span><span class="s1">: 
+                mensaje(</span><span class="s2">&quot;Vaciando cola no VIP.&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                gestorClientes.vaciarColaNoVip()</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'G'</span><span class="s1">: 
+                gestorClientes.procesarVip()</span><span class="s4">;</span><span class="s1"> 
+                mensaje(</span><span class="s2">&quot;Fin de procesar clientes VIP.&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'H'</span><span class="s1">: 
+                gestorClientes.procesarNoVip()</span><span class="s4">;</span><span class="s1"> 
+                mensaje(</span><span class="s2">&quot;Fin de procesar clientes no VIP.&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'I'</span><span class="s1">: 
+                mensaje(</span><span class="s2">&quot;Mostrando entradas vendidas ordenadas por ID.&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                gestorClientes.mostrarVendidas()</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'J'</span><span class="s1">: 
+                gestorClientes.reiniciar()</span><span class="s4">;</span><span class="s1"> 
+                mensaje(</span><span class="s2">&quot;Reiniciando programa.&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'K'</span><span class="s1">: 
+                gestorClientes.generarArbol()</span><span class="s4">;</span><span class="s1"> 
+                mensaje(</span><span class="s2">&quot;Creando arbol binario ordenado por DNI...&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+ 
+            </span><span class="s3">case </span><span class="s2">'L'</span><span class="s1">: 
+            { 
+                string dni_a_buscar</span><span class="s4">;</span><span class="s1"> 
+                cout &lt;&lt; </span><span class="s2">&quot;Introduce DNI: &quot;</span><span class="s4">;</span><span class="s1"> 
+                cin &gt;&gt; dni_a_buscar</span><span class="s4">;</span><span class="s1"> 
+                Cliente buscado = gestorClientes.buscarEnArbol(dni_a_buscar)</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">if</span><span class="s1">(buscado.getDni() == </span><span class="s2">&quot;ERROR. CLIENTE NO ENCONTRADO.&quot;</span><span class="s1">) 
+                { 
+                    cout &lt;&lt; </span><span class="s2">&quot;Error. Cliente no encontrado.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+                } 
+                </span><span class="s3">else</span><span class="s1"> 
+                { 
+                    cout &lt;&lt; buscado.mostrarDatos() &lt;&lt; endl</span><span class="s4">;</span><span class="s1"> 
+                } 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            } 
+ 
+            </span><span class="s3">case </span><span class="s2">'M'</span><span class="s1">: 
+                mensaje(</span><span class="s2">&quot;Mostrando arbol en preorden: &quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                gestorClientes.mostrarArbPreorden()</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'N'</span><span class="s1">: 
+                mensaje(</span><span class="s2">&quot;Mostrando arbol en postorden: &quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                gestorClientes.mostrarArbPosorden()</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'O'</span><span class="s1">: 
+                mensaje(</span><span class="s2">&quot;Mostrando arbol en inorden: &quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                gestorClientes.mostrarArbInorden()</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+ 
+            </span><span class="s3">case </span><span class="s2">'P'</span><span class="s1">: 
+                mensaje(</span><span class="s2">&quot;Dibujando arbol binario: &quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                gestorClientes.imprimirArbol()</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">case </span><span class="s2">'S'</span><span class="s1">: 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+            </span><span class="s3">default</span><span class="s1">: 
+                mensaje(</span><span class="s2">&quot;Opcion incorrecta...&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+                pausa()</span><span class="s4">;</span><span class="s1"> 
+                </span><span class="s3">break</span><span class="s4">;</span><span class="s1"> 
+        } 
+    } 
+    system(</span><span class="s2">&quot;cls&quot;</span><span class="s1">)</span><span class="s4">;</span><span class="s1"> 
+ 
+} 
+ 
+</span><span class="s3">int </span><span class="s1">main() { 
+ 
+ 
+    srand(time(NULL))</span><span class="s4">;</span><span class="s1"> 
+ 
+    menu()</span><span class="s4">;</span><span class="s1"> 
+ 
+} 
+ 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Programa.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(187,181,41); }
+.s3 { color: rgb(106,135,89); }
+.s4 { color: rgb(204,120,50); font-weight: bold; }
+.s5 { color: rgb(204,120,50); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Programa.h</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">//</span><span class="s1"> 
+</span><span class="s0">// Created by Marcos on 24/10/2017.</span><span class="s1"> 
+</span><span class="s0">//</span><span class="s1"> 
+ 
+</span><span class="s2">#ifndef </span><span class="s1">PL1_PROGRAMA_H 
+</span><span class="s2">#define </span><span class="s1">PL1_PROGRAMA_H 
+ 
+</span><span class="s2">#include </span><span class="s3">&quot;ColaCliente.h&quot;</span><span class="s1"> 
+</span><span class="s2">#include </span><span class="s3">&lt;iomanip&gt;</span><span class="s1"> 
+</span><span class="s2">#include </span><span class="s3">&quot;windows.h&quot;</span><span class="s1"> 
+</span><span class="s2">#include </span><span class="s3">&quot;ArbolBinario.h&quot;</span><span class="s1"> 
+ 
+ 
+</span><span class="s4">class </span><span class="s1">Programa 
+{ 
+</span><span class="s4">public</span><span class="s1">: 
+    Programa()</span><span class="s5">;</span><span class="s1"> 
+ 
+    </span><span class="s0">// Métodos aux:</span><span class="s1"> 
+ 
+    </span><span class="s4">int </span><span class="s1">numeroAleatorio(</span><span class="s4">int </span><span class="s1">min</span><span class="s5">, </span><span class="s4">int </span><span class="s1">max)</span><span class="s5">; </span><span class="s0">// Genera un num. aleatorio (inclusivo, inclusivo)</span><span class="s1"> 
+ 
+    </span><span class="s0">// Getters:</span><span class="s1"> 
+ 
+    </span><span class="s4">int </span><span class="s1">nClientesVip()</span><span class="s5">; </span><span class="s0">// Devuelve el tamaño de la cola vip.</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">nClientesNoVip()</span><span class="s5">; </span><span class="s0">// Devuelve el tamaño de la cola no vip.</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">mostrarColaVip()</span><span class="s5">; </span><span class="s0">// Muestra la cola Vip</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">mostrarColaNoVip()</span><span class="s5">; </span><span class="s0">// Muestra la cola No Vip</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">mostrarVendidas()</span><span class="s5">; </span><span class="s0">// Muestra la cola de entradas vendidas.</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">mostrarArbPreorden()</span><span class="s5">; </span><span class="s0">// Muestra por pantalla el árbol en preorden.</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">mostrarArbPosorden()</span><span class="s5">; </span><span class="s0">// Muestra por pantalla el árbol en posorden.</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">mostrarArbInorden()</span><span class="s5">; </span><span class="s0">// Muestra por pantalla el árbol en inorden.</span><span class="s1"> 
+    Cliente buscarEnArbol(string dni)</span><span class="s5">; </span><span class="s0">// Busca en el árbol binario un cliente dado su DNI.</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">imprimirArbol()</span><span class="s5">; </span><span class="s0">// Imprime el árbol binario por pantalla.</span><span class="s1"> 
+ 
+    </span><span class="s0">// Modificadoras:</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">generarColaVIP()</span><span class="s5">; </span><span class="s0">// Rellena colaVip con 15 clientes VIP</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">generarColaNoVIP()</span><span class="s5">; </span><span class="s0">// Rellena colaNoVip con 15 clientes No VIP.</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">vaciarColaVip()</span><span class="s5">; </span><span class="s0">// Vacia la cola Vip</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">vaciarColaNoVip()</span><span class="s5">; </span><span class="s0">// Vacia la cola no Vip</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">procesarVip()</span><span class="s5">; </span><span class="s0">// Simula el procesamiento de la cola VIP.</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">procesarNoVip()</span><span class="s5">; </span><span class="s0">// Simula el procesamiento de la cola No vip.</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">generarArbol()</span><span class="s5">; </span><span class="s0">// Genera el árbol binario.</span><span class="s1"> 
+    </span><span class="s4">void </span><span class="s1">reiniciar()</span><span class="s5">; </span><span class="s0">// Reinicia el programa.</span><span class="s1"> 
+ 
+ 
+ 
+</span><span class="s4">private</span><span class="s1">: 
+    ColaCliente colaVip</span><span class="s5">; </span><span class="s0">// Cola de clientes VIP.</span><span class="s1"> 
+    ColaCliente colaNoVip</span><span class="s5">; </span><span class="s0">// Cola de clientes No VIP.</span><span class="s1"> 
+    ColaCliente SV1</span><span class="s5">; </span><span class="s0">// Servidor vip 1.</span><span class="s1"> 
+    ColaCliente SNV1</span><span class="s5">, </span><span class="s1">SNV2</span><span class="s5">, </span><span class="s1">SNV3</span><span class="s5">, </span><span class="s1">SNV4</span><span class="s5">; </span><span class="s0">// Servidores no vip 1, 2, 3 y 4.</span><span class="s1"> 
+    Lista entradasVendidas</span><span class="s5">; </span><span class="s0">// Cola de clientes procesados ordenados por Id.</span><span class="s1"> 
+    ArbolBinario ab</span><span class="s5">;</span><span class="s1"> 
+ 
+    </span><span class="s0">// Métodos privados:</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">elegirServidor()</span><span class="s5">;</span><span class="s1"> 
+ 
+}</span><span class="s5">;</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">#endif </span><span class="s0">//PL1_PROGRAMA_H</span></pre>
+</body>
+</html>

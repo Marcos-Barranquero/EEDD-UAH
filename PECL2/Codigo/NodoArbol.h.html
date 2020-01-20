@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>NodoArbol.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(187,181,41); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(106,135,89); }
+.s3 { color: rgb(204,120,50); font-weight: bold; }
+.s4 { color: rgb(204,120,50); }
+.s5 { color: rgb(128,128,128); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+NodoArbol.h</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">#ifndef </span><span class="s1">PL2_NODOARBOL_H 
+</span><span class="s0">#define </span><span class="s1">PL2_NODOARBOL_H 
+ 
+</span><span class="s0">#include </span><span class="s2">&quot;Cliente.h&quot;</span><span class="s1"> 
+ 
+</span><span class="s3">class </span><span class="s1">NodoArbol { 
+</span><span class="s3">public</span><span class="s1">: 
+    NodoArbol(Cliente cliente</span><span class="s4">, </span><span class="s1">NodoArbol *hijo_izquierdo = NULL</span><span class="s4">, </span><span class="s1">NodoArbol *hijo_derecho = NULL)</span><span class="s4">; </span><span class="s5">// Constructor.</span><span class="s1"> 
+ 
+ 
+    Cliente cliente</span><span class="s4">; </span><span class="s5">// Cliente dentro del nodo.</span><span class="s1"> 
+ 
+    NodoArbol *hijo_izquierdo</span><span class="s4">; </span><span class="s5">// Puntero al hijo izquierdo.</span><span class="s1"> 
+    NodoArbol *hijo_derecho</span><span class="s4">; </span><span class="s5">// Puntero al hijo izquierdo.</span><span class="s1"> 
+    </span><span class="s3">friend class </span><span class="s1">ArbolBinario</span><span class="s4">;</span><span class="s1"> 
+</span><span class="s3">private</span><span class="s1">: 
+ 
+}</span><span class="s4">;</span><span class="s1"> 
+ 
+</span><span class="s3">typedef </span><span class="s1">NodoArbol *pnodoarbol</span><span class="s4">;</span><span class="s1"> 
+ 
+</span><span class="s0">#endif </span><span class="s5">// PL2_NODOARBOL_H</span><span class="s1"> 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<html>
+<head>
+<title>Programa.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(187,181,41); }
+.s3 { color: rgb(106,135,89); }
+.s4 { color: rgb(204,120,50); font-weight: bold; }
+.s5 { color: rgb(104,151,187); }
+.s6 { color: rgb(204,120,50); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Programa.cpp</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">//</span><span class="s1"> 
+</span><span class="s0">// Created by Marcos on 24/10/2017.</span><span class="s1"> 
+</span><span class="s0">//</span><span class="s1"> 
+ 
+</span><span class="s2">#include </span><span class="s3">&quot;Programa.h&quot;</span><span class="s1"> 
+ 
+Programa::Programa() {} 
+</span><span class="s0">// Rellena colaNoVip con 15 clientes No VIP.</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::generarColaNoVIP() { 
+    </span><span class="s4">if </span><span class="s1">(colaNoVip.estaVacia()) { 
+        </span><span class="s4">int </span><span class="s1">tInicio = </span><span class="s5">0</span><span class="s6">;</span><span class="s1"> 
+        </span><span class="s4">for </span><span class="s1">(</span><span class="s4">int </span><span class="s1">i = </span><span class="s5">0</span><span class="s6">; </span><span class="s1">i &lt; </span><span class="s5">25</span><span class="s6">; </span><span class="s1">++i) { 
+            tInicio += numeroAleatorio(</span><span class="s5">0</span><span class="s6">, </span><span class="s5">5</span><span class="s1">)</span><span class="s6">;</span><span class="s1"> 
+            Cliente clienteInsertado = Cliente(</span><span class="s4">true</span><span class="s6">, </span><span class="s1">tInicio + </span><span class="s5">120</span><span class="s1">)</span><span class="s6">;</span><span class="s1"> 
+            colaNoVip.insertar(Cliente(</span><span class="s4">true</span><span class="s6">, </span><span class="s1">tInicio + </span><span class="s5">120</span><span class="s1">))</span><span class="s6">;</span><span class="s1"> 
+        } 
+    } 
+} 
+</span><span class="s0">// Rellena colaVip con 15 clientes VIP</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::generarColaVIP() { 
+    </span><span class="s4">if </span><span class="s1">(colaVip.estaVacia()) { 
+        </span><span class="s4">int </span><span class="s1">tInicio = </span><span class="s5">0</span><span class="s6">;</span><span class="s1"> 
+        </span><span class="s4">for </span><span class="s1">(</span><span class="s4">int </span><span class="s1">i = </span><span class="s5">0</span><span class="s6">; </span><span class="s1">i &lt; </span><span class="s5">15</span><span class="s6">; </span><span class="s1">++i) { 
+            tInicio += numeroAleatorio(</span><span class="s5">0</span><span class="s6">, </span><span class="s5">5</span><span class="s1">)</span><span class="s6">; </span><span class="s0">// Usado para setear el tInicio.</span><span class="s1"> 
+            colaVip.insertar(Cliente(</span><span class="s4">true</span><span class="s6">, </span><span class="s1">tInicio))</span><span class="s6">;</span><span class="s1"> 
+        } 
+    } 
+ 
+} 
+</span><span class="s0">// Vacia la cola Vip</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::vaciarColaVip() { 
+    colaVip.vaciar()</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Vacia la cola no Vip</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::vaciarColaNoVip() { 
+    colaNoVip.vaciar()</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Muestra la cola Vip</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::mostrarColaVip() { 
+    colaVip.mostrar()</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Muestra la cola No Vip</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::mostrarColaNoVip() { 
+    colaNoVip.mostrar()</span><span class="s6">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s0">// Genera un número aleatorio entre un máximo y un mínimo (inclusivos)</span><span class="s1"> 
+</span><span class="s4">int </span><span class="s1">Programa::numeroAleatorio(</span><span class="s4">int </span><span class="s1">min</span><span class="s6">, </span><span class="s4">int </span><span class="s1">max) 
+{ 
+    </span><span class="s4">int </span><span class="s1">numero_aleatorio = min + rand() % (max + </span><span class="s5">1 </span><span class="s1">- min)</span><span class="s6">;</span><span class="s1"> 
+    </span><span class="s4">return </span><span class="s1">numero_aleatorio</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Devuelve el tamaño de la cola vip.</span><span class="s1"> 
+</span><span class="s4">int </span><span class="s1">Programa::nClientesVip() { 
+    </span><span class="s4">return </span><span class="s1">colaVip.getSize()</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Devuelve el tamaño de la cola no vip.</span><span class="s1"> 
+</span><span class="s4">int </span><span class="s1">Programa::nClientesNoVip() { 
+    </span><span class="s4">return </span><span class="s1">colaNoVip.getSize()</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Simula el procesamiento de la cola VIP.</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::procesarVip() { 
+    </span><span class="s0">//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">reloj = </span><span class="s5">0</span><span class="s6">; </span><span class="s0">// Reloj que irá contando la hora.</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">contador_espera = </span><span class="s5">99999</span><span class="s6">; </span><span class="s0">// Contador usado para sacar clientes del sv1 a lista.</span><span class="s1"> 
+ 
+ 
+ 
+    </span><span class="s4">while </span><span class="s1">(!colaVip.estaVacia() || !SV1.estaVacia()) { 
+ 
+ 
+        </span><span class="s0">// Si el tIni del primero de la colavip es el reloj:</span><span class="s1"> 
+        </span><span class="s4">while </span><span class="s1">(colaVip.getPrimero().getTInicioCompra() == reloj) { 
+            Cliente cl = colaVip.eliminar()</span><span class="s6">;</span><span class="s1"> 
+            </span><span class="s0">// Si no hay clientes procesándose, pongo el contador al procesamiento de este.</span><span class="s1"> 
+            </span><span class="s4">if </span><span class="s1">(SV1.estaVacia()) { contador_espera = cl.getTProcesamiento()</span><span class="s6">; </span><span class="s1">} 
+            SV1.insertar(cl)</span><span class="s6">;</span><span class="s1"> 
+        } 
+ 
+        </span><span class="s0">// Si se ha terminado de procesar:</span><span class="s1"> 
+        </span><span class="s4">if </span><span class="s1">(contador_espera == </span><span class="s5">0</span><span class="s1">) { 
+            Cliente cl = SV1.eliminar()</span><span class="s6">;</span><span class="s1"> 
+            </span><span class="s4">if </span><span class="s1">(!SV1.estaVacia()) contador_espera = SV1.getPrimero().getTProcesamiento()</span><span class="s6">;</span><span class="s1"> 
+            cl.setTFinCompra(reloj)</span><span class="s6">;</span><span class="s1"> 
+            entradasVendidas.insertarPorId(cl)</span><span class="s6">;</span><span class="s1"> 
+        } 
+ 
+        </span><span class="s0">//Muestra hora:</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;</span><span class="s6">\t</span><span class="s3">--------------&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;</span><span class="s6">\t</span><span class="s3">| hora: &quot;  </span><span class="s1">&lt;&lt; reloj &lt;&lt; </span><span class="s3">&quot;  |&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;</span><span class="s6">\t</span><span class="s3">--------------&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+ 
+        </span><span class="s0">//Muestra cola VIP:</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;Clientes en VIP: &quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        colaVip.mostrar()</span><span class="s6">;</span><span class="s1"> 
+ 
+        </span><span class="s0">//Muestra clientes en servidores:</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;Procesando clientes vip en servidor 1: &quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        SV1.mostrar()</span><span class="s6">;</span><span class="s1"> 
+ 
+        </span><span class="s0">// Muestra lista de entradas vendidas:</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;Lista entradas vendidas: &quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        entradasVendidas.mostrar()</span><span class="s6">;</span><span class="s1"> 
+ 
+        </span><span class="s0">// Pausa de 1 seg:</span><span class="s1"> 
+        Sleep(</span><span class="s5">1000</span><span class="s1">)</span><span class="s6">;</span><span class="s1"> 
+ 
+        </span><span class="s0">// Avanza el reloj:</span><span class="s1"> 
+        reloj++</span><span class="s6">;</span><span class="s1"> 
+ 
+        </span><span class="s0">// Disminuye el contador de espera:</span><span class="s1"> 
+        contador_espera--</span><span class="s6">;</span><span class="s1"> 
+ 
+        </span><span class="s0">// Limpia la pantalla:</span><span class="s1"> 
+        system(</span><span class="s3">&quot;cls&quot;</span><span class="s1">)</span><span class="s6">;</span><span class="s1"> 
+    } 
+ 
+    cout &lt;&lt; </span><span class="s3">&quot;Fin de clientes.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s0">// Elige el servidor más vacío de los servidores no vip.</span><span class="s1"> 
+</span><span class="s4">int </span><span class="s1">Programa::elegirServidor() 
+{ 
+    </span><span class="s4">if </span><span class="s1">(SNV1.getSize() &lt;= SNV2.getSize() &amp;&amp; 
+        SNV1.getSize() &lt;= SNV3.getSize() &amp;&amp; 
+        SNV1.getSize() &lt;= SNV4.getSize()) </span><span class="s4">return </span><span class="s5">1</span><span class="s6">;</span><span class="s1"> 
+    </span><span class="s4">else if </span><span class="s1">(SNV2.getSize() &lt;= SNV1.getSize() &amp;&amp; 
+             SNV2.getSize() &lt;= SNV3.getSize() &amp;&amp; 
+             SNV2.getSize() &lt;= SNV4.getSize()) </span><span class="s4">return </span><span class="s5">2</span><span class="s6">;</span><span class="s1"> 
+    </span><span class="s4">else if </span><span class="s1">(SNV3.getSize() &lt;= SNV1.getSize() &amp;&amp; 
+             SNV3.getSize() &lt;= SNV2.getSize() &amp;&amp; 
+             SNV3.getSize() &lt;= SNV4.getSize()) </span><span class="s4">return </span><span class="s5">3</span><span class="s6">;</span><span class="s1"> 
+    </span><span class="s4">else return </span><span class="s5">4</span><span class="s6">;</span><span class="s1"> 
+} 
+ 
+</span><span class="s0">// Simula el procesamiento de la cola No vip.</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::procesarNoVip() { 
+    </span><span class="s0">//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">reloj = </span><span class="s5">120</span><span class="s6">;</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">contador_esperas1 = </span><span class="s5">9999</span><span class="s6">;</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">contador_esperas2 = </span><span class="s5">9999</span><span class="s6">;</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">contador_esperas3 = </span><span class="s5">9999</span><span class="s6">;</span><span class="s1"> 
+    </span><span class="s4">int </span><span class="s1">contador_esperas4 = </span><span class="s5">9999</span><span class="s6">;</span><span class="s1"> 
+ 
+    </span><span class="s0">// Mientras haya clientes:</span><span class="s1"> 
+    </span><span class="s4">while </span><span class="s1">(!colaNoVip.estaVacia() || !SNV1.estaVacia() || !SNV1.estaVacia() 
+           || !SNV3.estaVacia() || !SNV4.estaVacia()) { 
+ 
+ 
+        </span><span class="s4">while </span><span class="s1">(colaNoVip.getPrimero().getTInicioCompra() == reloj) { 
+            Cliente cl = colaNoVip.eliminar()</span><span class="s6">;</span><span class="s1"> 
+            </span><span class="s4">if </span><span class="s1">(elegirServidor() == </span><span class="s5">1</span><span class="s1">) 
+            { 
+                </span><span class="s4">if </span><span class="s1">(SNV1.estaVacia()) contador_esperas1 = cl.getTProcesamiento()</span><span class="s6">;</span><span class="s1"> 
+                SNV1.insertar(cl)</span><span class="s6">;</span><span class="s1"> 
+            } </span><span class="s4">else if </span><span class="s1">(elegirServidor() == </span><span class="s5">2</span><span class="s1">) { 
+                </span><span class="s4">if </span><span class="s1">(SNV2.estaVacia()) contador_esperas2 = cl.getTProcesamiento()</span><span class="s6">;</span><span class="s1"> 
+                SNV2.insertar(cl)</span><span class="s6">;</span><span class="s1"> 
+            } </span><span class="s4">else if </span><span class="s1">(elegirServidor() == </span><span class="s5">3</span><span class="s1">) { 
+                </span><span class="s4">if </span><span class="s1">(SNV3.estaVacia()) contador_esperas3 = cl.getTProcesamiento()</span><span class="s6">;</span><span class="s1"> 
+                SNV3.insertar(cl)</span><span class="s6">;</span><span class="s1"> 
+            } </span><span class="s4">else </span><span class="s1">{ 
+                { 
+                    </span><span class="s4">if </span><span class="s1">(SNV4.estaVacia()) { contador_esperas4 = cl.getTProcesamiento()</span><span class="s6">; </span><span class="s1">} 
+                    SNV4.insertar(cl)</span><span class="s6">;</span><span class="s1"> 
+                } 
+            } 
+        } 
+ 
+        </span><span class="s4">if </span><span class="s1">(contador_esperas1 == </span><span class="s5">0</span><span class="s1">) { 
+            Cliente cl = SNV1.eliminar()</span><span class="s6">;</span><span class="s1"> 
+            </span><span class="s4">if </span><span class="s1">(!SNV1.estaVacia()) contador_esperas1 = SNV1.getPrimero().getTProcesamiento()</span><span class="s6">;</span><span class="s1"> 
+            cl.setTFinCompra(reloj)</span><span class="s6">;</span><span class="s1"> 
+            entradasVendidas.insertarPorId(cl)</span><span class="s6">;</span><span class="s1">} 
+ 
+        </span><span class="s4">if </span><span class="s1">(contador_esperas2 == </span><span class="s5">0</span><span class="s1">) { 
+            Cliente cl = SNV2.eliminar()</span><span class="s6">;</span><span class="s1"> 
+            </span><span class="s4">if </span><span class="s1">(!SNV2.estaVacia()) contador_esperas2 = SNV2.getPrimero().getTProcesamiento()</span><span class="s6">;</span><span class="s1"> 
+            cl.setTFinCompra(reloj)</span><span class="s6">;</span><span class="s1"> 
+            entradasVendidas.insertarPorId(cl)</span><span class="s6">;</span><span class="s1">} 
+ 
+        </span><span class="s4">if </span><span class="s1">(contador_esperas3 == </span><span class="s5">0</span><span class="s1">) { 
+            Cliente cl = SNV3.eliminar()</span><span class="s6">;</span><span class="s1"> 
+            </span><span class="s4">if </span><span class="s1">(!SNV3.estaVacia()) contador_esperas3 = SNV3.getPrimero().getTProcesamiento()</span><span class="s6">;</span><span class="s1"> 
+            cl.setTFinCompra(reloj)</span><span class="s6">;</span><span class="s1"> 
+            entradasVendidas.insertarPorId(cl)</span><span class="s6">;</span><span class="s1">} 
+ 
+        </span><span class="s4">if </span><span class="s1">(contador_esperas4 == </span><span class="s5">0</span><span class="s1">) { 
+            Cliente cl = SNV4.eliminar()</span><span class="s6">;</span><span class="s1"> 
+            </span><span class="s4">if </span><span class="s1">(!SNV4.estaVacia()) contador_esperas4 = SNV4.getPrimero().getTProcesamiento()</span><span class="s6">;</span><span class="s1"> 
+            cl.setTFinCompra(reloj)</span><span class="s6">;</span><span class="s1"> 
+            entradasVendidas.insertarPorId(cl)</span><span class="s6">;</span><span class="s1">} 
+ 
+        </span><span class="s0">//Muestra hora:</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;</span><span class="s6">\t</span><span class="s3">--------------&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;</span><span class="s6">\t</span><span class="s3">| hora: &quot;  </span><span class="s1">&lt;&lt; reloj &lt;&lt; </span><span class="s3">&quot;  |&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;</span><span class="s6">\t</span><span class="s3">--------------&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+ 
+        </span><span class="s0">//Muestra clientes no vip:</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;Clientes en no VIP: &quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        colaNoVip.mostrar()</span><span class="s6">;</span><span class="s1"> 
+ 
+        </span><span class="s0">//Muestra clientes en servidores:</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;Procesando clientes no vip en servidor 1: &quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        SNV1.mostrar()</span><span class="s6">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;Procesando clientes no vip en servidor 2: &quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        SNV2.mostrar()</span><span class="s6">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;Procesando clientes no vip en servidor 3: &quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        SNV3.mostrar()</span><span class="s6">;</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;Procesando clientes no vip en servidor 4: &quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        SNV4.mostrar()</span><span class="s6">;</span><span class="s1"> 
+ 
+        </span><span class="s0">//Muestra las entradas vendidas:</span><span class="s1"> 
+        cout &lt;&lt; </span><span class="s3">&quot;Lista entradas vendidas: &quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+        mostrarVendidas()</span><span class="s6">;</span><span class="s1"> 
+ 
+        contador_esperas1--</span><span class="s6">;</span><span class="s1"> 
+        contador_esperas2--</span><span class="s6">;</span><span class="s1"> 
+        contador_esperas3--</span><span class="s6">;</span><span class="s1"> 
+        contador_esperas4--</span><span class="s6">;</span><span class="s1"> 
+        Sleep(</span><span class="s5">1000</span><span class="s1">)</span><span class="s6">;</span><span class="s1"> 
+        reloj++</span><span class="s6">;</span><span class="s1"> 
+        system(</span><span class="s3">&quot;cls&quot;</span><span class="s1">)</span><span class="s6">;</span><span class="s1"> 
+    } 
+ 
+    cout &lt;&lt; </span><span class="s3">&quot;Fin de clientes.&quot; </span><span class="s1">&lt;&lt; endl</span><span class="s6">;</span><span class="s1"> 
+ 
+} 
+</span><span class="s0">// Muestra la cola de entradas vendidas.</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::mostrarVendidas() { 
+    entradasVendidas.mostrar()</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Reinicia el programa.</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::reiniciar() { 
+    entradasVendidas.vaciar()</span><span class="s6">;</span><span class="s1"> 
+    colaNoVip.vaciar()</span><span class="s6">;</span><span class="s1"> 
+    colaVip.vaciar()</span><span class="s6">;</span><span class="s1"> 
+    SV1.vaciar()</span><span class="s6">;</span><span class="s1"> 
+    SNV1.vaciar()</span><span class="s6">;</span><span class="s1"> 
+    SNV2.vaciar()</span><span class="s6">;</span><span class="s1"> 
+    SNV3.vaciar()</span><span class="s6">;</span><span class="s1"> 
+    SNV4.vaciar()</span><span class="s6">;</span><span class="s1"> 
+    ab = ArbolBinario()</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Genera el árbol binario.</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::generarArbol() { 
+    </span><span class="s4">while</span><span class="s1">(!entradasVendidas.estaVacia()) 
+    { 
+        ab.insertar(entradasVendidas.eliminar())</span><span class="s6">;</span><span class="s1"> 
+    } 
+} 
+</span><span class="s0">// Muestra por pantalla el árbol en preorden.</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::mostrarArbPreorden() { 
+    ab.mostrarArbolPreorden()</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Muestra por pantalla el árbol en inorden.</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::mostrarArbInorden() 
+{ 
+    ab.mostrarArbolInorden()</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Muestra por pantalla el árbol en postorden.</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::mostrarArbPosorden() 
+{ 
+    ab.mostrarArbolPosorden()</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Busca en el árbol binario un cliente dado su DNI.</span><span class="s1"> 
+Cliente Programa::buscarEnArbol(string dni) { 
+    </span><span class="s4">return </span><span class="s1">ab.buscarCliente(dni)</span><span class="s6">;</span><span class="s1"> 
+} 
+</span><span class="s0">// Imprime el árbol binario por pantalla.</span><span class="s1"> 
+</span><span class="s4">void </span><span class="s1">Programa::imprimirArbol() { 
+    ab.imprimeArbol()</span><span class="s6">;</span><span class="s1"> 
+ 
+} 
+ 
+ 
+</span></pre>
+</body>
+</html>
